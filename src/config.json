@@ -1,0 +1,305 @@
+{
+  "brand": {
+    "name": "Aurrallo",
+    "logo": "/assets/logo.png"
+  },
+
+  "colors": {
+    "heroBg": "#0a0920",
+    "heroGridColor": "rgba(255,255,255,0.04)",
+    "heroText": "#e6e6f0",
+    "heroSubtext": "rgba(230,230,240,0.62)",
+    "heroAccent": "#9aa0ff",
+    "heroOrb1": "#6c63ff",
+    "heroOrb2": "#4f46e5",
+    "heroOrb3": "#3b82f6",
+
+    "navbarBg": "rgba(10,9,32,0.88)",
+    "navbarText": "#b8bcd8",
+    "navbarLinkHover": "#ffffff",
+
+    "primaryBtn": "#6c63ff",
+    "primaryBtnText": "#ffffff",
+    "primaryBtnHover": "#5a52e8",
+    "secondaryBtnText": "#9aa0ff",
+    "secondaryBtnBorder": "rgba(154,160,255,0.35)",
+
+    "socialProofBg": "#ffffff",
+    "socialProofText": "#9ca3af",
+    "socialProofStat": "#6c63ff",
+
+    "painBg": "#fff1f2",
+    "painText": "#881337",
+    "painSubtext": "#be123c",
+    "painCardBg": "#ffffff",
+    "painCardBorder": "#fecdd3",
+    "painIconBg": "#ffe4e6",
+
+    "solutionBg": "#eff6ff",
+    "solutionText": "#1e3a5f",
+    "solutionSubtext": "#3b6fa0",
+    "solutionAccent": "#3b82f6",
+    "solutionIconBg": "#dbeafe",
+
+    "howItWorksBg": "#f5f3ff",
+    "howItWorksText": "#3b0764",
+    "howItWorksSubtext": "#6d28d9",
+    "howItWorksAccent": "#7c3aed",
+    "howItWorksCardBg": "#ffffff",
+    "howItWorksCardBorder": "#e9d5ff",
+    "howItWorksNumber": "#7c3aed",
+
+    "benefitsBg": "#f0fdf4",
+    "benefitsText": "#14532d",
+    "benefitsSubtext": "#166534",
+    "benefitsAccent": "#16a34a",
+    "benefitsCardBg": "#ffffff",
+    "benefitsCardBorder": "#bbf7d0",
+    "benefitsIconBg": "#dcfce7",
+
+    "pricingHighlightBg": "#6c63ff",
+    "pricingHighlightText": "#ffffff",
+    "pricingHighlightBadgeBg": "#ffffff",
+    "pricingHighlightBadgeText": "#6c63ff",
+
+    "ctaBg": "#f5f3ff",
+    "ctaText": "#3b0764",
+    "ctaSubtext": "rgba(59,7,100,0.65)",
+    "ctaAccent": "#7c3aed",
+
+    "footerBg": "#0a0920",
+    "footerText": "#9ca3af",
+    "footerHeading": "#e6e6f0",
+    "footerLinkHover": "#ffffff",
+    "footerBorder": "rgba(255,255,255,0.07)"
+  },
+
+  "navbar": {
+    "links": [
+      { "label": "Features",     "href": "#features"     },
+      { "label": "How It Works", "href": "#how-it-works" },
+      { "label": "Pricing",      "href": "#pricing"      }
+    ],
+    "ctaText": "Get Started",
+    "ctaHref": "#cta"
+  },
+
+  "hero": {
+    "badge": "Now in development",
+    "headline": "Automate your invoice follow-ups",
+    "headlineAccent": "follow-ups",
+    "subheadline": "Aurrallo syncs your invoices from Quickbooks and automatically notifies clients of overdue invoices so you can focus on delivering.",
+    "useEmailCollection": true,
+    "primaryCta":   { "text": "Start for free",     "href": "#cta"          },
+    "secondaryCta": { "text": "See how it works",   "href": "#how-it-works" },
+    "emailPlaceholder": "Enter your email",
+    "emailCtaText": "Join our email list",
+    "trustNote": "We will contact you about product updates and release dates."
+  },
+
+  "socialProof": {
+    "title": "Built for teams who hate chasing invoices",
+    "stats": [
+      { "value": "10+",       "label": "Early Users"       },
+      { "value": "Private",   "label": "Beta Access"  },
+      { "value": "Weekly",    "label": "Product Updates"     },
+      { "value": "Direct",    "label": "Founder Support"    }
+    ]
+  },
+
+  "pain": {
+    "id": "features",
+    "sectionLabel": "The Problem",
+    "title": "Getting paid is harder than it should be",
+    "subtitle": "Chasing invoices manually wastes time that should be spent on your product.",
+    "cards": [
+      {
+        "icon": "fa-solid fa-envelope",
+        "title": "You have to chase every invoice",
+        "description": "Manually following up on overdue invoices takes time you don't have. And it's easy to forget who still owes you."
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "title": "Late payments slow everything down",
+        "description": "When invoices slip through the cracks, your cash flow becomes unpredictable and stressful."
+      },
+      {
+        "icon": "fa-solid fa-triangle-exclamation",
+        "title": "Follow-ups feel awkward and inconsistent",
+        "description": "Writing reminder emails over and over is frustrating, and inconsistent messaging can hurt client relationships."
+      }
+    ]
+  },
+
+  "solution": {
+    "sectionLabel": "The Solution",
+    "title": "Automate your invoice follow-ups",
+    "subtitle": "Aurrallo connects to QuickBooks and handles overdue invoice reminders for you—so you get paid without the manual work.",
+    "points": [
+      { "icon": "fa-solid fa-link",         "text": "Sync invoices directly from QuickBooks"          },
+      { "icon": "fa-solid fa-bolt",         "text": "Automatically send overdue reminders" },
+      { "icon": "fa-solid fa-clock",          "text": "Stay on top of every unpaid invoice"  },
+      { "icon": "fa-solid fa-circle-check", "text": "Keep follow-ups consistent and professional"                }
+    ]
+  },
+
+  "howItWorks": {
+    "id": "how-it-works",
+    "sectionLabel": "How It Works",
+    "title": "Up and running in three steps",
+    "subtitle": "Connect your invoices and let Aurrallo handle the follow-ups.",
+    "steps": [
+      {
+        "number": "01",
+        "icon": "fa-solid fa-link",
+        "title": "Connect QuickBooks",
+        "description": "Securely sync your invoices from QuickBooks in just a few clicks."
+      },
+      {
+        "number": "02",
+        "icon": "fa-solid fa-gear",
+        "title": "Set your follow-up rules",
+        "description": "Choose when and how reminders are sent for overdue invoices."
+      },
+      {
+        "number": "03",
+        "icon": "fa-solid fa-paper-plane",
+        "title": "Get paid without chasing",
+        "description": "Aurrallo automatically sends reminders so you don’t have to."
+      }
+    ]
+  },
+
+  "benefits": {
+    "sectionLabel": "Benefits",
+    "title": "Everything you need to get paid on time",
+    "subtitle": "Simple, reliable automation for your invoice follow-ups.",
+    "items": [
+      { "icon": "fa-solid fa-clock",  "title": "Save hours every week",  "description": "Stop writing and sending reminder emails manually." },
+      { "icon": "fa-solid fa-money-bill-wave",   "title": "Improve your cash flow",           "description": "Consistent follow-ups help invoices get paid faster." },
+      { "icon": "fa-solid fa-repeat",     "title": "Fully automated reminders",        "description": "Set it once and let Aurrallo handle the rest." },
+      { "icon": "fa-solid fa-user-check",  "title": "Stay professional with clients",            "description": "Send clear, consistent follow-ups without the awkwardness." },
+      { "icon": "fa-solid fa-link",        "title": "Works with your existing tools",         "description": "Connect with QuickBooks and manage invoices without switching platforms." },
+      { "icon": "fa-solid fa-seedling",         "title": "Built for growing businesses",             "description": "Simple enough to start, powerful enough to scale with you." }
+    ]
+  },
+
+  "pricing": {
+    "id": "pricing",
+    "sectionLabel": "Pricing",
+    "title": "Pricing that scales with your cash flow",
+    "subtitle": "The more you invoice, the more Aurrallo helps you get paid.",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "$49",
+        "period": "/ month",
+        "description": "For freelancers and small businesses automating their first follow-ups.",
+        "features": [
+          "Up to 50 active invoices",
+          "Automated follow-ups",
+          "Basic reminder templates",
+          "QuickBooks integration",
+          "Email support"
+        ],
+        "cta": "Start free trial",
+        "highlighted": false
+      },
+      {
+        "name": "Growth",
+        "price": "$149",
+        "period": "/ month",
+        "description": "For businesses with consistent invoice volume and growing cash flow needs.",
+        "features": [
+          "Up to 250 active invoices",
+          "Advanced follow-up scheduling",
+          "Custom messaging templates",
+          "All integrations",
+          "Priority email support",
+          "Basic analytics"
+        ],
+        "cta": "Start free trial",
+        "highlighted": true,
+        "badge": "Most Popular"
+      },
+      {
+        "name": "Scale",
+        "price": "$399",
+        "period": "/ month",
+        "description": "For high-volume businesses that rely on consistent, automated collections.",
+        "features": [
+          "Unlimited invoices",
+          "Smart follow-up automation",
+          "Advanced analytics & insights",
+          "Priority support",
+          "Early access to new features"
+        ],
+        "cta": "Contact sales",
+        "highlighted": false
+      }
+    ]
+  },
+
+  "finalCta": {
+    "id": "cta",
+    "sectionLabel": "Get Started",
+    "title": "Be first to stop chasing invoices",
+    "subtitle": "Join the waitlist to get early access to Aurrallo.",
+    "useEmailCollection": true,
+    "primaryCta":   { "text": "Start for free", "href": "#" },
+    "secondaryCta": { "text": "Book a demo",    "href": "#" },
+    "emailPlaceholder": "Enter your email",
+    "emailCtaText": "Join the waitlist",
+    "trustNote": "We’ll only email you about product updates and early access."
+  },
+
+  "footer": {
+    "linksEnabled": false,
+    "linksDisabledText": "More pages are on the way — we're still building.",
+    "description": "Automated invoice follow-ups, powered by QuickBooks.",
+    "email": "hello@aurrallo.com",
+    "columns": [
+      {
+        "title": "Product",
+        "links": [
+          { "label": "Features",  "href": "#" },
+          { "label": "Pricing",   "href": "#" },
+          { "label": "Changelog", "href": "#" },
+          { "label": "Roadmap",   "href": "#" }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "label": "About",   "href": "#" },
+          { "label": "Blog",    "href": "#" },
+          { "label": "Careers", "href": "#" },
+          { "label": "Press",   "href": "#" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "label": "Documentation", "href": "#" },
+          { "label": "API Reference", "href": "#" },
+          { "label": "Community",     "href": "#" },
+          { "label": "Status",        "href": "#" }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          { "label": "Privacy Policy",  "href": "#" },
+          { "label": "Terms of Service","href": "#" },
+          { "label": "Cookie Policy",   "href": "#" }
+        ]
+      }
+    ],
+    "social": [
+      { "icon": "fa-brands fa-x-twitter", "href": "https://x.com/aurrallo", "label": "X / Twitter" },
+      { "icon": "fa-brands fa-instagram",  "href": "https://www.instagram.com/aurrallo/", "label": "Instagram"  },
+      { "icon": "fa-brands fa-linkedin",   "href": "https://www.youtube.com/@aurrallo", "label": "YouTube"   }
+    ],
+    "copyright": "© 2025 Aurrallo, Inc. All rights reserved."
+  }
+}
