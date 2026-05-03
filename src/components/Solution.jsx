@@ -2,11 +2,11 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 /* ── Invoice follow-up dashboard mockup ─────────────────── */
 const invoices = [
-  { client: 'Miller Design Co.',  num: 'INV-1042', amount: '$4,200', due: 'Apr 15', status: 'overdue',  note: '17d overdue' },
-  { client: 'Harvest Media',      num: 'INV-1039', amount: '$1,850', due: 'Apr 22', status: 'reminded', note: 'Reminder sent' },
-  { client: 'Oak & Stone LLC',    num: 'INV-1037', amount: '$680',   due: 'Apr 28', status: 'reminded', note: 'Reminder sent' },
-  { client: 'Meridian Group',     num: 'INV-1035', amount: '$3,100', due: 'May 1',  status: 'overdue',  note: '3d overdue' },
-  { client: 'Bellfield Co.',      num: 'INV-1033', amount: '$920',   due: 'May 5',  status: 'paid',     note: 'Paid ✓' },
+  { client: 'Lowcountry Yacht Club',  num: 'INV-1042', amount: '$4,200', due: 'Apr 15', status: 'overdue',  note: '17d overdue' },
+  { client: 'Folly Beach Surf Co.',   num: 'INV-1039', amount: '$1,850', due: 'Apr 22', status: 'reminded', note: 'Reminder sent' },
+  { client: 'Tides & Co. Charters',  num: 'INV-1037', amount: '$680',   due: 'Apr 28', status: 'reminded', note: 'Reminder sent' },
+  { client: 'Palmetto Dockworks',     num: 'INV-1035', amount: '$3,100', due: 'May 1',  status: 'overdue',  note: '3d overdue' },
+  { client: 'Isle of Palms Marina',   num: 'INV-1033', amount: '$920',   due: 'May 5',  status: 'paid',     note: 'Paid ✓' },
 ];
 
 const statusStyle = {
