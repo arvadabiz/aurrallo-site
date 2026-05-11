@@ -50,6 +50,19 @@ body {
   100% { transform: translateY(0px);    opacity: 0; }
 }
 
+/* On mobile the hero is much shorter — cap the wave well below the email input */
+@media (max-width: 768px) {
+  @keyframes beach-wave {
+    0%   { transform: translateY(0px);   opacity: 0; }
+    5%   { transform: translateY(-15px); opacity: 1; }
+    40%  { transform: translateY(-90px); opacity: 1; }
+    54%  { transform: translateY(-87px); opacity: 0.65; }
+    82%  { transform: translateY(-25px); opacity: 0; }
+    83%  { transform: translateY(0px);   opacity: 0; }
+    100% { transform: translateY(0px);   opacity: 0; }
+  }
+}
+
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar        { width: 5px; }
 ::-webkit-scrollbar-track  { background: transparent; }
