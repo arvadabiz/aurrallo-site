@@ -201,7 +201,7 @@ export default function Hero({ config, colors, nextSectionBg }) {
         tall animated SVGs never bleed into the SocialProof section below.
       */}
       <div
-        className="relative z-10 -mb-px"
+        className="relative z-[2] -mb-px"
         style={{ height: 'clamp(50px, 7vw, 90px)', clipPath: 'inset(-600px 0 0 0)' }}
       >
         {/* Static base: dual-fill, zero transparent areas — no blue ever shows through */}
@@ -224,7 +224,7 @@ export default function Hero({ config, colors, nextSectionBg }) {
           next section. viewBox height 440 = ~90px container + 350px extension.
         */}
 
-        {/* Wave 1 */}
+        {/* Wave 1 — gradient: transparent at crest → solid white 100px lower */}
         <svg
           viewBox="0 0 1440 440"
           xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +235,14 @@ export default function Hero({ config, colors, nextSectionBg }) {
             animation: 'beach-wave 11s ease-in-out 0s infinite',
           }}
         >
-          <path d="M0,45 C180,90 360,0 540,45 C720,90 900,0 1080,45 C1260,90 1380,50 1440,45 L1440,440 L0,440 Z" fill={nextSectionBg} />
+          <defs>
+            <linearGradient id="beachWaveGrad1" x1="0" y1="0" x2="0" y2="440" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stopColor={nextSectionBg} stopOpacity="0" />
+              <stop offset="10%"  stopColor={nextSectionBg} stopOpacity="0" />
+              <stop offset="33%"  stopColor={nextSectionBg} stopOpacity="1" />
+            </linearGradient>
+          </defs>
+          <path d="M0,45 C180,90 360,0 540,45 C720,90 900,0 1080,45 C1260,90 1380,50 1440,45 L1440,440 L0,440 Z" fill="url(#beachWaveGrad1)" />
         </svg>
 
         {/* Wave 2 — delay = 40% × 11s = 4.4s, starts right as wave 1 peaks */}
@@ -249,7 +256,14 @@ export default function Hero({ config, colors, nextSectionBg }) {
             animation: 'beach-wave 11s ease-in-out 4.4s infinite',
           }}
         >
-          <path d="M0,52 C200,100 380,8 560,52 C740,100 920,8 1100,52 C1270,100 1390,55 1440,50 L1440,440 L0,440 Z" fill={nextSectionBg} />
+          <defs>
+            <linearGradient id="beachWaveGrad2" x1="0" y1="0" x2="0" y2="440" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stopColor={nextSectionBg} stopOpacity="0" />
+              <stop offset="10%"  stopColor={nextSectionBg} stopOpacity="0" />
+              <stop offset="33%"  stopColor={nextSectionBg} stopOpacity="1" />
+            </linearGradient>
+          </defs>
+          <path d="M0,52 C200,100 380,8 560,52 C740,100 920,8 1100,52 C1270,100 1390,55 1440,50 L1440,440 L0,440 Z" fill="url(#beachWaveGrad2)" />
         </svg>
       </div>
     </section>

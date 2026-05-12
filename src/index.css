@@ -43,8 +43,8 @@ body {
 @keyframes beach-wave {
   0%   { transform: translateY(0px);    opacity: 0; }
   5%   { transform: translateY(-25px);  opacity: 1; }
-  40%  { transform: translateY(-250px); opacity: 1; }
-  54%  { transform: translateY(-244px); opacity: 0.65; }
+  40%  { transform: translateY(-220px); opacity: 1; }
+  54%  { transform: translateY(-214px); opacity: 0.65; }
   82%  { transform: translateY(-55px);  opacity: 0; }
   83%  { transform: translateY(0px);    opacity: 0; }
   100% { transform: translateY(0px);    opacity: 0; }
