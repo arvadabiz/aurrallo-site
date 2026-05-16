@@ -203,7 +203,7 @@ export default function Hero({ config, colors, nextSectionBg }) {
           className="absolute inset-0 w-full h-full block">
           <path
             d="M0,0 L1440,0 L1440,45 C1380,50 1260,90 1080,45 C900,0 720,90 540,45 C360,0 180,90 0,45 Z"
-            fill={colors.heroBg}
+            fill="none"
           />
           <path
             d="M0,45 C180,90 360,0 540,45 C720,90 900,0 1080,45 C1260,90 1380,50 1440,45 L1440,90 L0,90 Z"
