@@ -249,7 +249,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                 Log In
               </a>
               <a
-                href="/sign-up"
+                href="/register"
                 className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:-translate-y-px"
                 style={{ backgroundColor: colors.primaryBtn, color: colors.primaryBtnText }}
               >
@@ -397,7 +397,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                 Log In
               </a>
               <a
-                href="/sign-up"
+                href="/register"
                 className="mt-2 text-center px-5 py-2.5 rounded-lg text-sm font-semibold"
                 style={{ backgroundColor: colors.primaryBtn, color: colors.primaryBtnText }}
                 onClick={() => setMobileOpen(false)}
