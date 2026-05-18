@@ -181,11 +181,6 @@ export default function SignUpPage() {
   const [apiError, setApiError] = useState(null);
   const [loading,  setLoading]  = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('aurrallo_token')) {
-      window.location.href = `${APP_URL}/dashboard`;
-    }
-  }, []);
 
   const set = k => e =>
     setFields(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
@@ -231,8 +226,6 @@ export default function SignUpPage() {
       if (!res.ok) { const d = await res.json(); throw new Error(d.error || 'Registration failed'); }
 
       const { access_token, refresh_token } = await res.json();
-      localStorage.setItem('aurrallo_token', access_token);
-      if (refresh_token) localStorage.setItem('aurrallo_refresh_token', refresh_token);
       const params = new URLSearchParams({
         access_token,
         refresh_token: refresh_token || '',
