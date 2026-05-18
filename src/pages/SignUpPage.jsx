@@ -64,21 +64,19 @@ function Field({ label, optional, error, children }) {
 // ---------------------------------------------------------------------------
 // Integration logo SVGs
 // ---------------------------------------------------------------------------
-function QuickBooksLogo() {
+function QuickBooksLogo({ size = 40 }) {
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+    <svg width={size} height={size} viewBox="0 0 52 52" fill="none">
       <circle cx="26" cy="26" r="26" fill="#2CA01C" />
-      {/* Q body */}
       <path d="M17 18h11a7 7 0 010 14h-5v-4h5a3 3 0 000-6H21v14h-4V18z" fill="white" />
-      {/* B bump */}
       <circle cx="34" cy="36" r="4" fill="white" />
     </svg>
   );
 }
 
-function StripeLogo() {
+function StripeLogo({ size = 40 }) {
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+    <svg width={size} height={size} viewBox="0 0 52 52" fill="none">
       <rect width="52" height="52" rx="12" fill="#635BFF" />
       <path
         d="M26 17c-3.6 0-6.5 1.8-6.5 5.4 0 6.8 8.7 5.2 8.7 8.1 0 1.2-1.1 1.9-2.9 1.9-2.5 0-5.5-1-5.5-1v4.5s3 .9 5.8.9c4 0 7-1.9 7-5.6 0-6.9-8.8-5.4-8.8-8.2 0-1.1 1-1.7 2.5-1.7 2.4 0 5 .9 5 .9v-4.4S28.7 17 26 17z"
@@ -88,9 +86,9 @@ function StripeLogo() {
   );
 }
 
-function ResendLogo() {
+function ResendLogo({ size = 40 }) {
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+    <svg width={size} height={size} viewBox="0 0 52 52" fill="none">
       <rect width="52" height="52" rx="12" fill="#18181B" />
       <path
         d="M15 15h13c4.4 0 8 3.6 8 8s-3.6 8-8 8h-4l7 9h-5.5l-6.5-9H19v9h-4V15zm4 4v8h9a4 4 0 000-8h-9z"
@@ -100,105 +98,120 @@ function ResendLogo() {
   );
 }
 
-const SLIDES = [
-  {
-    key: 'qb',
-    Logo: QuickBooksLogo,
-    name: 'QuickBooks',
-    description: 'Syncs your invoices in real time so nothing slips through the cracks.',
-  },
-  {
-    key: 'stripe',
-    Logo: StripeLogo,
-    name: 'Stripe',
-    description: 'Accept payments the moment a client clicks — no chasing required.',
-  },
-  {
-    key: 'resend',
-    Logo: ResendLogo,
-    name: 'Resend',
-    description: 'Delivers every reminder with inbox-first reliability and open tracking.',
-  },
-];
-
 // ---------------------------------------------------------------------------
-// Logo slider
+// Left panel
 // ---------------------------------------------------------------------------
-function IntegrationSlider() {
-  const [idx, setIdx]       = useState(0);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const t = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => { setIdx(i => (i + 1) % SLIDES.length); setVisible(true); }, 350);
-    }, 3200);
-    return () => clearInterval(t);
-  }, []);
-
-  const slide = SLIDES[idx];
-
+function HeroPanel() {
   return (
-    <div className="flex flex-col gap-5">
-      <p
-        className="text-[10px] font-semibold uppercase tracking-widest"
-        style={{ color: 'rgba(230,230,240,0.35)' }}
-      >
-        Integrates with
-      </p>
-
-      {/* Slide card */}
+    <div
+      className="hidden lg:flex w-1/2 flex-col justify-between px-16 py-14"
+      style={{ borderRight: `1px solid ${colors.footerBorder}` }}
+    >
+      {/* Badge */}
       <div
         style={{
-          opacity:    visible ? 1 : 0,
-          transform:  visible ? 'translateY(0)' : 'translateY(8px)',
-          transition: 'opacity 0.35s ease, transform 0.35s ease',
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: '6px 14px',
+          borderRadius: '8px',
+          border: '1px solid rgba(154,160,255,0.3)',
+          width: 'fit-content',
         }}
       >
-        <div
-          className="flex items-center gap-4 rounded-2xl px-5 py-4"
+        <span
           style={{
-            background:   'rgba(255,255,255,0.04)',
-            border:       '1px solid rgba(255,255,255,0.07)',
-            maxWidth:     '300px',
+            fontSize: '11px',
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: colors.heroAccent,
           }}
         >
-          <slide.Logo />
-          <div className="flex flex-col gap-0.5">
-            <span
-              className="text-sm font-semibold"
-              style={{ color: colors.heroText }}
-            >
-              {slide.name}
-            </span>
-            <span
-              className="text-xs leading-relaxed"
-              style={{ color: colors.heroSubtext }}
-            >
-              {slide.description}
-            </span>
-          </div>
+          Automated Invoice Follow-Up
+        </span>
+      </div>
+
+      {/* Hero content */}
+      <div className="flex flex-col gap-6">
+        <h1
+          className="font-neue font-bold"
+          style={{
+            fontSize: 'clamp(2.6rem, 4vw, 3.6rem)',
+            lineHeight: 1.07,
+            color: colors.heroText,
+          }}
+        >
+          Stop chasing<br />invoices.
+        </h1>
+
+        <p
+          style={{
+            fontSize: '15px',
+            lineHeight: 1.7,
+            maxWidth: '340px',
+            color: colors.heroSubtext,
+          }}
+        >
+          Aurrallo connects to QuickBooks and automatically sends reminders
+          for overdue invoices — so you get paid without the awkward follow-up.
+        </p>
+
+        {/* Stat card — solid lavender, matches screenshot layout */}
+        <div
+          className="flex items-center gap-5 rounded-2xl"
+          style={{
+            background: '#6c63ff',
+            padding: '20px 24px',
+            maxWidth: '380px',
+          }}
+        >
+          <span
+            className="font-neue font-bold shrink-0"
+            style={{ fontSize: '3.75rem', color: '#ffffff', lineHeight: 1 }}
+          >
+            3x
+          </span>
+          <p
+            style={{
+              fontSize: '14px',
+              color: 'rgba(255,255,255,0.88)',
+              lineHeight: 1.55,
+              margin: 0,
+            }}
+          >
+            Average improvement in invoice collections after signing up with Aurrallo
+          </p>
         </div>
       </div>
 
-      {/* Dot indicators */}
-      <div className="flex items-center gap-1.5">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setVisible(false); setTimeout(() => { setIdx(i); setVisible(true); }, 200); }}
-            style={{
-              width:           i === idx ? '20px' : '6px',
-              height:          '6px',
-              borderRadius:    '999px',
-              border:          'none',
-              cursor:          'pointer',
-              padding:         0,
-              backgroundColor: i === idx ? '#6c63ff' : 'rgba(255,255,255,0.15)',
-              transition:      'all 0.3s ease',
-            }}
-          />
-        ))}
+      {/* Integration logo row */}
+      <div>
+        <p
+          style={{
+            fontSize: '10px',
+            fontWeight: 600,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'rgba(230,230,240,0.3)',
+            marginBottom: '14px',
+          }}
+        >
+          Integrates with
+        </p>
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2.5">
+            <QuickBooksLogo size={32} />
+            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>QuickBooks</span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <StripeLogo size={32} />
+            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>Stripe</span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <ResendLogo size={32} />
+            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>Resend</span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -221,14 +234,14 @@ export default function SignUpPage() {
 
   function validate() {
     const e = {};
-    if (!fields.firstName.trim())  e.firstName   = 'Required';
-    if (!fields.lastName.trim())   e.lastName    = 'Required';
+    if (!fields.firstName.trim())   e.firstName   = 'Required';
+    if (!fields.lastName.trim())    e.lastName    = 'Required';
     if (!fields.companyName.trim()) e.companyName = 'Company name is required';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = 'Invalid email address';
     if (fields.website && !/^https?:\/\/.+/.test(fields.website)) e.website = 'Enter a valid URL (include https://)';
-    if (fields.phone.trim().length < 7)  e.phone    = 'Enter a valid phone number';
-    if (fields.password.length < 8)      e.password = 'Password must be at least 8 characters';
-    if (!fields.consent)                 e.consent  = 'You must agree to continue';
+    if (fields.phone.trim().length < 7) e.phone    = 'Enter a valid phone number';
+    if (fields.password.length < 8)     e.password = 'Password must be at least 8 characters';
+    if (!fields.consent)                e.consent  = 'You must agree to continue';
     return e;
   }
 
@@ -245,13 +258,13 @@ export default function SignUpPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName:       fields.firstName,
-          lastName:        fields.lastName,
-          companyName:     fields.companyName,
-          email:           fields.email,
-          website:         fields.website || undefined,
-          phone:           fields.phone,
-          password:        fields.password,
+          firstName:        fields.firstName,
+          lastName:         fields.lastName,
+          companyName:      fields.companyName,
+          email:            fields.email,
+          website:          fields.website || undefined,
+          phone:            fields.phone,
+          password:         fields.password,
           marketingConsent: true,
         }),
       });
@@ -281,39 +294,7 @@ export default function SignUpPage() {
       <Navbar config={signUpNavConfig} colors={colors} brand={brand} alwaysOpaque />
 
       <div className="flex flex-1 pt-16">
-
-        {/* ── Left panel ── */}
-        <div
-          className="hidden lg:flex w-1/2 flex-col justify-between px-16 py-14"
-          style={{ borderRight: `1px solid ${colors.footerBorder}` }}
-        >
-          {/* Brand */}
-          <div className="flex items-center gap-2.5">
-            <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-xl object-contain" />
-            <span className="font-neue font-bold text-lg tracking-tight" style={{ color: colors.heroAccent }}>
-              {brand.name}
-            </span>
-          </div>
-
-          {/* Headline + subtext */}
-          <div className="flex flex-col gap-4">
-            <h1
-              className="font-neue font-bold leading-[1.12]"
-              style={{ fontSize: 'clamp(2rem, 3vw, 2.75rem)', color: colors.heroText }}
-            >
-              Stop chasing<br />invoices.
-            </h1>
-            <p
-              className="text-sm leading-relaxed max-w-[280px]"
-              style={{ color: colors.heroSubtext }}
-            >
-              Aurrallo connects to your existing tools and handles overdue reminders automatically — so you can focus on the work.
-            </p>
-          </div>
-
-          {/* Integration slider */}
-          <IntegrationSlider />
-        </div>
+        <HeroPanel />
 
         {/* ── Right panel ── */}
         <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-16 py-12 overflow-y-auto">
@@ -420,7 +401,6 @@ export default function SignUpPage() {
             </p>
           </div>
         </div>
-
       </div>
 
       <Footer config={footer} colors={colors} brand={brand} />
