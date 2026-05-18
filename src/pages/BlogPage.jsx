@@ -273,6 +273,7 @@ export default function BlogPage() {
       .from('articles')
       .select('id, title, slug, body, published_at, is_updated, is_featured, thumbnail_url, read_time_override, author_id, author:users!author_id(name, first_name, last_name, avatar_url)')
       .not('published_at', 'is', null)
+      .eq('is_hidden', false)
       .order('published_at', { ascending: false })
       .then(({ data, error }) => {
         if (error) { setState('error'); return; }
