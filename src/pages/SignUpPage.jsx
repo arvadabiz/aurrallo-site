@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -20,7 +20,7 @@ const signUpNavConfig = {
 };
 
 // ---------------------------------------------------------------------------
-// Input style helpers
+// Input helpers
 // ---------------------------------------------------------------------------
 const baseInput = {
   width: '100%',
@@ -37,25 +37,23 @@ const baseInput = {
 
 function useInputFocus() {
   const [focused, setFocused] = useState(false);
-  const style = {
-    ...baseInput,
-    borderColor: focused ? '#6c63ff' : 'rgba(255,255,255,0.10)',
-    boxShadow: focused ? '0 0 0 3px rgba(108,99,255,0.2)' : 'none',
+  return {
+    style: {
+      ...baseInput,
+      borderColor: focused ? '#6c63ff' : 'rgba(255,255,255,0.10)',
+      boxShadow:   focused ? '0 0 0 3px rgba(108,99,255,0.2)' : 'none',
+    },
+    onFocus: () => setFocused(true),
+    onBlur:  () => setFocused(false),
   };
-  return { style, onFocus: () => setFocused(true), onBlur: () => setFocused(false) };
 }
 
 function Field({ label, optional, error, children }) {
   return (
     <div>
-      <label
-        className="block text-sm font-medium mb-1.5"
-        style={{ color: colors.heroText }}
-      >
+      <label className="block text-sm font-medium mb-1.5" style={{ color: colors.heroText }}>
         {label}
-        {optional && (
-          <span className="font-normal ml-1" style={{ color: colors.heroSubtext }}>(optional)</span>
-        )}
+        {optional && <span className="font-normal ml-1" style={{ color: colors.heroSubtext }}>(optional)</span>}
       </label>
       {children}
       {error && <p className="text-xs mt-1" style={{ color: '#f87171' }}>{error}</p>}
@@ -64,86 +62,143 @@ function Field({ label, optional, error, children }) {
 }
 
 // ---------------------------------------------------------------------------
-// Works With carousel
+// Integration logo SVGs
 // ---------------------------------------------------------------------------
-const INTEGRATIONS = [
-  { name: 'QuickBooks', bg: '#2CA01C', abbr: 'QB' },
-  { name: 'Stripe',     bg: '#635BFF', abbr: 'S'  },
-  { name: 'Resend',     bg: '#111827', abbr: 'R'  },
-];
-
-function WorksWithCarousel() {
-  const [idx, setIdx]     = useState(0);
-  const [fading, setFading] = useState(false);
-
-  useEffect(() => {
-    const t = setInterval(() => {
-      setFading(true);
-      setTimeout(() => { setIdx(i => (i + 1) % INTEGRATIONS.length); setFading(false); }, 280);
-    }, 2600);
-    return () => clearInterval(t);
-  }, []);
-
-  const item = INTEGRATIONS[idx];
-
+function QuickBooksLogo() {
   return (
-    <div>
-      <p className="text-[10px] font-semibold uppercase tracking-widest mb-3"
-         style={{ color: colors.heroSubtext }}>
-        Works with
-      </p>
-      <div className="flex items-center gap-2.5"
-           style={{ opacity: fading ? 0 : 1, transform: fading ? 'translateY(4px)' : 'translateY(0)',
-                    transition: 'opacity 0.28s ease, transform 0.28s ease' }}>
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-             style={{ backgroundColor: item.bg }}>
-          <span style={{ fontSize: '10px', fontWeight: 700, color: '#fff', lineHeight: 1 }}>{item.abbr}</span>
-        </div>
-        <span className="text-sm font-semibold" style={{ color: colors.heroText }}>{item.name}</span>
-        <div className="flex items-center gap-1 ml-1">
-          {INTEGRATIONS.map((_, i) => (
-            <div key={i} style={{
-              width: i === idx ? '16px' : '5px',
-              height: '5px',
-              borderRadius: '999px',
-              backgroundColor: i === idx ? '#6c63ff' : 'rgba(255,255,255,0.15)',
-              transition: 'all 0.3s ease',
-            }} />
-          ))}
-        </div>
-      </div>
-    </div>
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <circle cx="26" cy="26" r="26" fill="#2CA01C" />
+      {/* Q body */}
+      <path d="M17 18h11a7 7 0 010 14h-5v-4h5a3 3 0 000-6H21v14h-4V18z" fill="white" />
+      {/* B bump */}
+      <circle cx="34" cy="36" r="4" fill="white" />
+    </svg>
   );
 }
 
-// ---------------------------------------------------------------------------
-// Stat card
-// ---------------------------------------------------------------------------
-function StatCard() {
+function StripeLogo() {
   return (
-    <div className="relative overflow-hidden rounded-2xl p-5 w-fit" style={{
-      background: 'linear-gradient(135deg, rgba(108,99,255,0.28) 0%, rgba(108,99,255,0.06) 100%)',
-      border: '1px solid rgba(108,99,255,0.45)',
-      boxShadow: '0 0 48px rgba(108,99,255,0.18), 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)',
-    }}>
-      <div className="absolute -top-10 -left-10 w-36 h-36 rounded-full pointer-events-none"
-           style={{ background: 'radial-gradient(circle, rgba(108,99,255,0.35) 0%, transparent 70%)' }} />
-      <div className="relative flex items-center gap-5">
-        <div className="flex flex-col">
-          <span className="font-neue font-bold leading-none"
-                style={{ fontSize: '4rem', color: '#a5a0ff',
-                         textShadow: '0 0 32px rgba(108,99,255,0.9), 0 0 64px rgba(108,99,255,0.4)' }}>
-            3x
-          </span>
-          <span className="text-[10px] font-semibold uppercase tracking-widest mt-1"
-                style={{ color: 'rgba(165,160,255,0.6)' }}>
-            avg improvement
-          </span>
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#635BFF" />
+      <path
+        d="M26 17c-3.6 0-6.5 1.8-6.5 5.4 0 6.8 8.7 5.2 8.7 8.1 0 1.2-1.1 1.9-2.9 1.9-2.5 0-5.5-1-5.5-1v4.5s3 .9 5.8.9c4 0 7-1.9 7-5.6 0-6.9-8.8-5.4-8.8-8.2 0-1.1 1-1.7 2.5-1.7 2.4 0 5 .9 5 .9v-4.4S28.7 17 26 17z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+function ResendLogo() {
+  return (
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#18181B" />
+      <path
+        d="M15 15h13c4.4 0 8 3.6 8 8s-3.6 8-8 8h-4l7 9h-5.5l-6.5-9H19v9h-4V15zm4 4v8h9a4 4 0 000-8h-9z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+const SLIDES = [
+  {
+    key: 'qb',
+    Logo: QuickBooksLogo,
+    name: 'QuickBooks',
+    description: 'Syncs your invoices in real time so nothing slips through the cracks.',
+  },
+  {
+    key: 'stripe',
+    Logo: StripeLogo,
+    name: 'Stripe',
+    description: 'Accept payments the moment a client clicks — no chasing required.',
+  },
+  {
+    key: 'resend',
+    Logo: ResendLogo,
+    name: 'Resend',
+    description: 'Delivers every reminder with inbox-first reliability and open tracking.',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Logo slider
+// ---------------------------------------------------------------------------
+function IntegrationSlider() {
+  const [idx, setIdx]       = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => { setIdx(i => (i + 1) % SLIDES.length); setVisible(true); }, 350);
+    }, 3200);
+    return () => clearInterval(t);
+  }, []);
+
+  const slide = SLIDES[idx];
+
+  return (
+    <div className="flex flex-col gap-5">
+      <p
+        className="text-[10px] font-semibold uppercase tracking-widest"
+        style={{ color: 'rgba(230,230,240,0.35)' }}
+      >
+        Integrates with
+      </p>
+
+      {/* Slide card */}
+      <div
+        style={{
+          opacity:    visible ? 1 : 0,
+          transform:  visible ? 'translateY(0)' : 'translateY(8px)',
+          transition: 'opacity 0.35s ease, transform 0.35s ease',
+        }}
+      >
+        <div
+          className="flex items-center gap-4 rounded-2xl px-5 py-4"
+          style={{
+            background:   'rgba(255,255,255,0.04)',
+            border:       '1px solid rgba(255,255,255,0.07)',
+            maxWidth:     '300px',
+          }}
+        >
+          <slide.Logo />
+          <div className="flex flex-col gap-0.5">
+            <span
+              className="text-sm font-semibold"
+              style={{ color: colors.heroText }}
+            >
+              {slide.name}
+            </span>
+            <span
+              className="text-xs leading-relaxed"
+              style={{ color: colors.heroSubtext }}
+            >
+              {slide.description}
+            </span>
+          </div>
         </div>
-        <div className="w-px self-stretch" style={{ background: 'rgba(108,99,255,0.3)' }} />
-        <p className="text-sm leading-snug max-w-[130px]" style={{ color: 'rgba(230,230,240,0.75)' }}>
-          Faster invoice collections for Aurrallo users
-        </p>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex items-center gap-1.5">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setVisible(false); setTimeout(() => { setIdx(i); setVisible(true); }, 200); }}
+            style={{
+              width:           i === idx ? '20px' : '6px',
+              height:          '6px',
+              borderRadius:    '999px',
+              border:          'none',
+              cursor:          'pointer',
+              padding:         0,
+              backgroundColor: i === idx ? '#6c63ff' : 'rgba(255,255,255,0.15)',
+              transition:      'all 0.3s ease',
+            }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -157,22 +212,23 @@ export default function SignUpPage() {
     firstName: '', lastName: '', companyName: '', email: '',
     website: '', phone: '', password: '', consent: false,
   });
-  const [errors, setErrors]   = useState({});
+  const [errors,   setErrors]   = useState({});
   const [apiError, setApiError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading,  setLoading]  = useState(false);
 
-  const set = (k) => (e) => setFields(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
+  const set = k => e =>
+    setFields(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
 
   function validate() {
     const e = {};
-    if (!fields.firstName.trim())  e.firstName  = 'Required';
-    if (!fields.lastName.trim())   e.lastName   = 'Required';
+    if (!fields.firstName.trim())  e.firstName   = 'Required';
+    if (!fields.lastName.trim())   e.lastName    = 'Required';
     if (!fields.companyName.trim()) e.companyName = 'Company name is required';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) e.email = 'Invalid email address';
     if (fields.website && !/^https?:\/\/.+/.test(fields.website)) e.website = 'Enter a valid URL (include https://)';
-    if (fields.phone.trim().length < 7) e.phone = 'Enter a valid phone number';
-    if (fields.password.length < 8)     e.password = 'Password must be at least 8 characters';
-    if (!fields.consent)                e.consent = 'You must agree to continue';
+    if (fields.phone.trim().length < 7)  e.phone    = 'Enter a valid phone number';
+    if (fields.password.length < 8)      e.password = 'Password must be at least 8 characters';
+    if (!fields.consent)                 e.consent  = 'You must agree to continue';
     return e;
   }
 
@@ -189,13 +245,13 @@ export default function SignUpPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: fields.firstName,
-          lastName:  fields.lastName,
-          companyName: fields.companyName,
-          email:     fields.email,
-          website:   fields.website || undefined,
-          phone:     fields.phone,
-          password:  fields.password,
+          firstName:       fields.firstName,
+          lastName:        fields.lastName,
+          companyName:     fields.companyName,
+          email:           fields.email,
+          website:         fields.website || undefined,
+          phone:           fields.phone,
+          password:        fields.password,
           marketingConsent: true,
         }),
       });
@@ -204,7 +260,11 @@ export default function SignUpPage() {
       if (!res.ok) { const d = await res.json(); throw new Error(d.error || 'Registration failed'); }
 
       const { access_token, refresh_token } = await res.json();
-      const params = new URLSearchParams({ access_token, refresh_token: refresh_token || '', redirect: '/onboarding' });
+      const params = new URLSearchParams({
+        access_token,
+        refresh_token: refresh_token || '',
+        redirect: '/onboarding',
+      });
       window.location.href = `${APP_URL}/auth/callback?${params}`;
     } catch (err) {
       setApiError(err.message);
@@ -212,7 +272,6 @@ export default function SignUpPage() {
     }
   }
 
-  // Individual input focus state
   const fn = useInputFocus(), ln = useInputFocus(), co = useInputFocus(),
         em = useInputFocus(), ws = useInputFocus(), ph = useInputFocus(),
         pw = useInputFocus();
@@ -221,44 +280,51 @@ export default function SignUpPage() {
     <div className="flex flex-col min-h-screen" style={{ background: colors.heroBg, color: colors.heroText }}>
       <Navbar config={signUpNavConfig} colors={colors} brand={brand} alwaysOpaque />
 
-      {/* Split body */}
       <div className="flex flex-1 pt-16">
 
-        {/* Left panel */}
-        <div className="hidden lg:flex w-1/2 flex-col justify-between px-16 py-14"
-             style={{ borderRight: `1px solid ${colors.footerBorder}` }}>
-
+        {/* ── Left panel ── */}
+        <div
+          className="hidden lg:flex w-1/2 flex-col justify-between px-16 py-14"
+          style={{ borderRight: `1px solid ${colors.footerBorder}` }}
+        >
           {/* Brand */}
           <div className="flex items-center gap-2.5">
             <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-xl object-contain" />
-            <span className="font-neue font-bold text-lg tracking-tight" style={{ color: '#9aa0ff' }}>
+            <span className="font-neue font-bold text-lg tracking-tight" style={{ color: colors.heroAccent }}>
               {brand.name}
             </span>
           </div>
 
-          {/* Hero */}
-          <div className="flex flex-col gap-8">
-            <h1 className="font-neue font-bold leading-[1.1]"
-                style={{ fontSize: 'clamp(2.4rem, 3.5vw, 3.25rem)', color: colors.heroText }}>
-              Get paid faster,<br />automatically.
+          {/* Headline + subtext */}
+          <div className="flex flex-col gap-4">
+            <h1
+              className="font-neue font-bold leading-[1.12]"
+              style={{ fontSize: 'clamp(2rem, 3vw, 2.75rem)', color: colors.heroText }}
+            >
+              Stop chasing<br />invoices.
             </h1>
-            <StatCard />
-            <p className="text-sm leading-relaxed max-w-[300px]" style={{ color: colors.heroSubtext }}>
-              Stop chasing invoices. Aurrallo sends automated reminders on your behalf so you get paid without the awkward follow-up.
+            <p
+              className="text-sm leading-relaxed max-w-[280px]"
+              style={{ color: colors.heroSubtext }}
+            >
+              Aurrallo connects to your existing tools and handles overdue reminders automatically — so you can focus on the work.
             </p>
           </div>
 
-          <WorksWithCarousel />
+          {/* Integration slider */}
+          <IntegrationSlider />
         </div>
 
-        {/* Right panel — form */}
+        {/* ── Right panel ── */}
         <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-16 py-12 overflow-y-auto">
           <div className="w-full max-w-sm">
 
             {/* Mobile logo */}
             <div className="flex items-center gap-2.5 mb-8 lg:hidden">
               <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-xl object-contain" />
-              <span className="font-neue font-bold text-lg tracking-tight" style={{ color: '#9aa0ff' }}>{brand.name}</span>
+              <span className="font-neue font-bold text-lg tracking-tight" style={{ color: colors.heroAccent }}>
+                {brand.name}
+              </span>
             </div>
 
             <div className="mb-7">
@@ -268,7 +334,6 @@ export default function SignUpPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
 
-              {/* First + Last */}
               <div className="grid grid-cols-2 gap-3">
                 <Field label="First name" error={errors.firstName}>
                   <input type="text" autoComplete="given-name" placeholder="Jane"
@@ -312,17 +377,20 @@ export default function SignUpPage() {
                        style={pw.style} onFocus={pw.onFocus} onBlur={pw.onBlur} />
               </Field>
 
-              {/* Consent */}
               <div className="pt-1">
                 <label className="flex items-start gap-2.5 cursor-pointer">
-                  <input type="checkbox" checked={fields.consent} onChange={set('consent')}
-                         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded"
-                         style={{ accentColor: '#6c63ff' }} />
+                  <input
+                    type="checkbox"
+                    checked={fields.consent}
+                    onChange={set('consent')}
+                    className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded"
+                    style={{ accentColor: '#6c63ff' }}
+                  />
                   <span className="text-xs leading-relaxed" style={{ color: colors.heroSubtext }}>
                     I agree to Aurrallo's{' '}
-                    <Link to="/terms" style={{ color: '#9aa0ff' }} className="hover:underline">Terms of Service</Link>
+                    <Link to="/terms" style={{ color: colors.heroAccent }} className="hover:underline">Terms of Service</Link>
                     {' '}and{' '}
-                    <Link to="/privacy" style={{ color: '#9aa0ff' }} className="hover:underline">Privacy Policy</Link>
+                    <Link to="/privacy" style={{ color: colors.heroAccent }} className="hover:underline">Privacy Policy</Link>
                     , and consent to receive product updates and marketing communications. You can unsubscribe at any time.
                   </span>
                 </label>
@@ -348,7 +416,7 @@ export default function SignUpPage() {
 
             <p className="mt-4 text-center text-sm" style={{ color: colors.heroSubtext }}>
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#9aa0ff' }} className="hover:underline font-medium">Sign in</Link>
+              <Link to="/login" style={{ color: colors.heroAccent }} className="hover:underline font-medium">Sign in</Link>
             </p>
           </div>
         </div>
