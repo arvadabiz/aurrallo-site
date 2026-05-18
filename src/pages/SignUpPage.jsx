@@ -13,7 +13,7 @@ const signUpNavConfig = {
   ...navbar,
   links: navbar.links.map(link => ({
     ...link,
-    href: link.href.startsWith('#') ? `/${link.href}` : link.href,
+    href: link.href?.startsWith('#') ? `/${link.href}` : link.href,
   })),
   ctaText: 'Sign In',
   ctaHref: '/login',

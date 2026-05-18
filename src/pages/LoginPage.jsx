@@ -13,7 +13,7 @@ const loginNavConfig = {
   ...navbar,
   links: navbar.links.map(link => ({
     ...link,
-    href: link.href.startsWith('#') ? `/${link.href}` : link.href,
+    href: link.href?.startsWith('#') ? `/${link.href}` : link.href,
   })),
   ctaText: 'Get Started',
   ctaHref: '/sign-up',
