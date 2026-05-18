@@ -99,10 +99,10 @@
   "socialProof": {
     "title": "Built for businesses who are done chasing invoices",
     "stats": [
-      { "value": "QuickBooks", "label": "Native Integration" },
-      { "value": "3x",         "label": "Faster Collections" },
-      { "value": "Automated",  "label": "Reminder Sequences" },
-      { "value": "Real-time",  "label": "Invoice Sync"       }
+      { "value": "10+",    "label": "Early Users"       },
+      { "value": "Private","label": "Beta Access"       },
+      { "value": "Weekly", "label": "Product Updates"   },
+      { "value": "Direct", "label": "Founder Support"   }
     ]
   },
 
