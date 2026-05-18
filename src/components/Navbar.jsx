@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function Navbar({ config, colors, brand }) {
+export default function Navbar({ config, colors, brand, alwaysOpaque = false }) {
   const [scrolled,    setScrolled]    = useState(false);
   const [mobileOpen,  setMobileOpen]  = useState(false);
 
@@ -10,11 +10,12 @@ export default function Navbar({ config, colors, brand }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const opaque = scrolled || alwaysOpaque;
   const navStyle = {
-    backgroundColor: scrolled ? colors.navbarBg : 'transparent',
-    backdropFilter:       scrolled ? 'blur(14px)' : 'none',
-    WebkitBackdropFilter: scrolled ? 'blur(14px)' : 'none',
-    borderBottom: scrolled ? `1px solid ${colors.footerBorder}` : '1px solid transparent',
+    backgroundColor: opaque ? colors.navbarBg : 'transparent',
+    backdropFilter:       opaque ? 'blur(14px)' : 'none',
+    WebkitBackdropFilter: opaque ? 'blur(14px)' : 'none',
+    borderBottom: opaque ? `1px solid ${colors.footerBorder}` : '1px solid transparent',
   };
 
   return (

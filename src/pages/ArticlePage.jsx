@@ -35,7 +35,7 @@ function authorDisplayName(author) {
 function Shell({ children }) {
   return (
     <div className="font-sans min-h-screen flex flex-col" style={{ background: colors.heroBg, color: colors.heroText }}>
-      <Navbar config={articleNavConfig} colors={colors} brand={brand} />
+      <Navbar config={articleNavConfig} colors={colors} brand={brand} alwaysOpaque />
       <div className="flex-1 pt-16">
         {children}
       </div>
