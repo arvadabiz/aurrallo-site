@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -43,6 +43,12 @@ export default function LoginPage() {
   const [errors,   setErrors]   = useState({});
   const [apiError, setApiError] = useState(null);
   const [loading,  setLoading]  = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('aurrallo_token')) {
+      window.location.href = `${APP_URL}/dashboard`;
+    }
+  }, []);
 
   const em = useInputFocus();
   const pw = useInputFocus();

@@ -181,6 +181,12 @@ export default function SignUpPage() {
   const [apiError, setApiError] = useState(null);
   const [loading,  setLoading]  = useState(false);
 
+  useEffect(() => {
+    if (localStorage.getItem('aurrallo_token')) {
+      window.location.href = `${APP_URL}/dashboard`;
+    }
+  }, []);
+
   const set = k => e =>
     setFields(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
 
