@@ -263,9 +263,9 @@
         "title": "Policies",
         "links": [
           { "label": "Terms of Service","href": "/terms" },
-          { "label": "Privacy Policy",  "href": "/privacy-policy" },
-          { "label": "Cookie Policy",   "href": "/cookie-policy" },
-          { "label": "Refund Policy",   "href": "/refund-policy" }
+          { "label": "Privacy Policy",  "href": "/privacy" },
+          { "label": "Cookie Policy",   "href": "/cookies" },
+          { "label": "Refund Policy",   "href": "/refunds" }
         ]
       },
       {
