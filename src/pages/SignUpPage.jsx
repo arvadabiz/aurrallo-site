@@ -24,7 +24,7 @@ const signUpNavConfig = {
 // ---------------------------------------------------------------------------
 const baseInput = {
   width: '100%',
-  padding: '7px 10px',
+  padding: '8px 12px',
   fontSize: '14px',
   borderRadius: '12px',
   border: '1px solid rgba(255,255,255,0.10)',
@@ -51,7 +51,7 @@ function useInputFocus() {
 function Field({ label, optional, error, children }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-1" style={{ color: colors.heroText }}>
+      <label className="block text-sm font-medium mb-1.5" style={{ color: colors.heroText }}>
         {label}
         {optional && <span className="font-normal ml-1" style={{ color: colors.heroSubtext }}>(optional)</span>}
       </label>
@@ -104,7 +104,7 @@ function ResendLogo({ size = 40 }) {
 function HeroPanel() {
   return (
     <div
-      className="hidden lg:flex w-1/2 flex-col justify-center gap-5 px-10 py-10"
+      className="hidden lg:flex w-1/2 flex-col justify-between px-10 py-8"
       style={{ borderRight: `1px solid ${colors.footerBorder}` }}
     >
       {/* Badge */}
@@ -257,11 +257,11 @@ export default function SignUpPage() {
         <HeroPanel />
 
         {/* ── Right panel ── */}
-        <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-10 py-8 overflow-y-auto">
-          <div className="w-full max-w-md">
+        <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-16 py-12 overflow-y-auto">
+          <div className="w-full max-w-sm">
 
             {/* Mobile logo */}
-            <div className="flex items-center gap-2.5 mb-6 lg:hidden">
+            <div className="flex items-center gap-2.5 mb-8 lg:hidden">
               <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-xl object-contain" />
               <span className="font-neue font-bold text-lg tracking-tight" style={{ color: colors.heroAccent }}>
                 {brand.name}
