@@ -96,7 +96,7 @@ export default function Pricing({ config, colors }) {
 
               {/* CTA */}
               <a
-                href="#cta"
+                href={plan.name === 'Scale' ? 'mailto:hello@aurrallo.com' : '/register'}
                 className="block text-center py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
                 style={
                   plan.highlighted

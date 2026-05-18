@@ -84,25 +84,25 @@
   },
 
   "hero": {
-    "badge": "Now in development",
-    "headline": "Automate your invoice follow-ups",
-    "headlineAccent": "follow-ups",
-    "subheadline": "Aurrallo syncs your invoices from Quickbooks and automatically notifies clients of overdue invoices so you can focus on delivering.",
-    "useEmailCollection": true,
-    "primaryCta":   { "text": "Start for free",     "href": "#cta"          },
+    "badge": "Now in Beta",
+    "headline": "Stop chasing invoices. Start getting paid.",
+    "headlineAccent": "getting paid.",
+    "subheadline": "Aurrallo connects to QuickBooks and automatically sends reminders for overdue invoices — so cash comes in without the awkward follow-up.",
+    "useEmailCollection": false,
+    "primaryCta":   { "text": "Start free trial",   "href": "/register"     },
     "secondaryCta": { "text": "See how it works",   "href": "#how-it-works" },
     "emailPlaceholder": "Enter your email",
-    "emailCtaText": "Join our email list",
-    "trustNote": "We will contact you about product updates and release dates."
+    "emailCtaText": "Get early access",
+    "trustNote": "No credit card required. Cancel anytime."
   },
 
   "socialProof": {
-    "title": "Built for teams who hate chasing invoices",
+    "title": "Built for businesses who are done chasing invoices",
     "stats": [
-      { "value": "10+",       "label": "Early Users"       },
-      { "value": "Private",   "label": "Beta Access"  },
-      { "value": "Weekly",    "label": "Product Updates"     },
-      { "value": "Direct",    "label": "Founder Support"    }
+      { "value": "QuickBooks", "label": "Native Integration" },
+      { "value": "3x",         "label": "Faster Collections" },
+      { "value": "Automated",  "label": "Reminder Sequences" },
+      { "value": "Real-time",  "label": "Invoice Sync"       }
     ]
   },
 
@@ -242,14 +242,14 @@
   "finalCta": {
     "id": "cta",
     "sectionLabel": "Get Started",
-    "title": "Be first to stop chasing invoices",
-    "subtitle": "Join the waitlist to get early access to Aurrallo.",
-    "useEmailCollection": true,
-    "primaryCta":   { "text": "Start for free", "href": "#" },
-    "secondaryCta": { "text": "Book a demo",    "href": "#" },
+    "title": "Get paid without the follow-up",
+    "subtitle": "Connect QuickBooks, set your reminder sequence, and let Aurrallo handle the rest.",
+    "useEmailCollection": false,
+    "primaryCta":   { "text": "Start free trial", "href": "/register"           },
+    "secondaryCta": { "text": "Sign in",          "href": "/login"              },
     "emailPlaceholder": "Enter your email",
-    "emailCtaText": "Join the waitlist",
-    "trustNote": "We’ll only email you about product updates and early access."
+    "emailCtaText": "Get early access",
+    "trustNote": "No credit card required. Cancel anytime."
   },
 
   "footer": {
@@ -293,6 +293,6 @@
       { "icon": "fa-brands fa-instagram",  "href": "https://www.instagram.com/aurrallo/", "label": "Instagram"  },
       { "icon": "fa-brands fa-linkedin",   "href": "https://www.youtube.com/@aurrallo", "label": "YouTube"   }
     ],
-    "copyright": "© 2025 Aurrallo, Inc. All rights reserved."
+    "copyright": "© 2026 Aurrallo, Inc. All rights reserved."
   }
 }
