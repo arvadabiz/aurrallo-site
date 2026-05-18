@@ -10,19 +10,101 @@ function getInitials(name) {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-const DROPDOWN_ITEMS = [
+const USER_DROPDOWN_ITEMS = [
   { label: 'Dashboard', href: `${APP_URL}/dashboard` },
   { label: 'Settings',  href: `${APP_URL}/settings`  },
   { label: 'Changelog', href: '/changelog'             },
 ];
 
+// ---------------------------------------------------------------------------
+// Resources mega-menu content — update columns here when finalised
+// ---------------------------------------------------------------------------
+const RESOURCES_COLUMNS = [
+  {
+    heading: 'Learn',
+    items: [
+      { label: 'Blog',       href: '/blog',      desc: 'Tips, product updates, and more'  },
+      { label: 'Changelog',  href: '/changelog', desc: "What's new in Aurrallo"            },
+      { label: 'Use Cases',  href: '/use-cases', desc: 'How businesses use Aurrallo'      },
+    ],
+  },
+  {
+    heading: 'Support',
+    items: [
+      { label: 'Help Center', href: '/support',  desc: 'Guides and troubleshooting'       },
+      { label: 'Contact',     href: '/contact',  desc: 'Get in touch with our team'       },
+      { label: 'Status',      href: 'https://status.aurrallo.com', desc: 'Service uptime' },
+    ],
+  },
+  {
+    heading: 'Company',
+    items: [
+      { label: 'About',     href: '/about',    desc: 'Our mission and story'              },
+      { label: 'Careers',   href: '/careers',  desc: "We're hiring"                      },
+      { label: 'Security',  href: '/security', desc: 'How we protect your data'          },
+    ],
+  },
+];
+
+function ResourcesPanel({ colors, onMouseEnter, onMouseLeave }) {
+  return (
+    <div
+      className="absolute left-1/2 -translate-x-1/2 top-full mt-3 rounded-2xl z-50"
+      style={{
+        width: 620,
+        background: 'rgba(12,10,36,0.98)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: `1px solid ${colors.footerBorder}`,
+        boxShadow: '0 16px 48px rgba(0,0,0,0.55)',
+      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="grid grid-cols-3 divide-x" style={{ divideColor: colors.footerBorder }}>
+        {RESOURCES_COLUMNS.map((col, ci) => (
+          <div
+            key={col.heading}
+            className="p-5"
+            style={{ borderRight: ci < 2 ? `1px solid ${colors.footerBorder}` : 'none' }}
+          >
+            <p
+              className="text-[10px] font-bold uppercase tracking-widest mb-4"
+              style={{ color: 'rgba(154,160,255,0.45)' }}
+            >
+              {col.heading}
+            </p>
+            <div className="flex flex-col gap-0.5">
+              {col.items.map(item => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="flex flex-col px-3 py-2.5 rounded-xl transition-colors duration-150 group"
+                  style={{ textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                >
+                  <span className="text-sm font-medium" style={{ color: colors.heroText }}>{item.label}</span>
+                  <span className="text-[11px] mt-0.5" style={{ color: colors.heroSubtext }}>{item.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Navbar({ config, colors, brand, alwaysOpaque = false }) {
-  const [scrolled,     setScrolled]     = useState(false);
-  const [mobileOpen,   setMobileOpen]   = useState(false);
-  const [user,         setUser]         = useState(null);
-  const [authLoading,  setAuthLoading]  = useState(true);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [scrolled,      setScrolled]      = useState(false);
+  const [mobileOpen,    setMobileOpen]    = useState(false);
+  const [user,          setUser]          = useState(null);
+  const [authLoading,   setAuthLoading]   = useState(true);
+  const [userDropOpen,  setUserDropOpen]  = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const userDropRef    = useRef(null);
+  const resourcesTimer = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -47,21 +129,29 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
   }, []);
 
   useEffect(() => {
-    if (!dropdownOpen) return;
+    if (!userDropOpen) return;
     function onClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
+      if (userDropRef.current && !userDropRef.current.contains(e.target)) {
+        setUserDropOpen(false);
       }
     }
     document.addEventListener('mousedown', onClickOutside);
     return () => document.removeEventListener('mousedown', onClickOutside);
-  }, [dropdownOpen]);
+  }, [userDropOpen]);
+
+  function openResources() {
+    clearTimeout(resourcesTimer.current);
+    setResourcesOpen(true);
+  }
+  function closeResources() {
+    resourcesTimer.current = setTimeout(() => setResourcesOpen(false), 140);
+  }
 
   function handleSignOut() {
     localStorage.removeItem('aurrallo_token');
     localStorage.removeItem('aurrallo_refresh_token');
     setUser(null);
-    setDropdownOpen(false);
+    setUserDropOpen(false);
     setMobileOpen(false);
   }
 
@@ -73,18 +163,15 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
     borderBottom: opaque ? `1px solid ${colors.footerBorder}` : '1px solid transparent',
   };
 
-  const initials = getInitials(user?.name);
-  const displayName = user?.name?.split(' ')[0] ?? user?.email;
+  const initials     = getInitials(user?.name);
+  const displayName  = user?.name?.split(' ')[0] ?? user?.email;
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={navStyle}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Brand */}
-        <a href="/" className="flex items-center gap-2.5">
+        <a href="/" className="flex items-center gap-2.5 shrink-0">
           <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-lg object-cover" />
           <span className="font-neue font-bold text-[17px]" style={{ color: colors.heroText }}>
             {brand.name}
@@ -92,19 +179,58 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
         </a>
 
         {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-8">
-          {config.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium transition-colors duration-200"
-              style={{ color: colors.navbarText }}
-              onMouseEnter={e => (e.currentTarget.style.color = colors.navbarLinkHover)}
-              onMouseLeave={e => (e.currentTarget.style.color = colors.navbarText)}
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden md:flex items-center gap-7">
+          {config.links.map(link =>
+            link.dropdown ? (
+              <div
+                key="resources"
+                className="relative"
+                onMouseEnter={openResources}
+                onMouseLeave={closeResources}
+              >
+                <button
+                  className="flex items-center gap-1 text-sm font-medium transition-colors duration-200"
+                  style={{
+                    color: resourcesOpen ? colors.navbarLinkHover : colors.navbarText,
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                  }}
+                >
+                  {link.label}
+                  <svg
+                    width="11" height="11" viewBox="0 0 12 12" fill="none"
+                    style={{
+                      transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s',
+                      marginTop: 1,
+                    }}
+                  >
+                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                {resourcesOpen && (
+                  <ResourcesPanel
+                    colors={colors}
+                    onMouseEnter={openResources}
+                    onMouseLeave={closeResources}
+                  />
+                )}
+              </div>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm font-medium transition-colors duration-200"
+                style={{ color: colors.navbarText }}
+                onMouseEnter={e => (e.currentTarget.style.color = colors.navbarLinkHover)}
+                onMouseLeave={e => (e.currentTarget.style.color = colors.navbarText)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         {/* Desktop auth area */}
@@ -116,10 +242,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
               <a
                 href="/login"
                 className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
-                style={{
-                  color: colors.secondaryBtnText,
-                  border: `1px solid ${colors.secondaryBtnBorder}`,
-                }}
+                style={{ color: colors.secondaryBtnText, border: `1px solid ${colors.secondaryBtnBorder}` }}
               >
                 Log In
               </a>
@@ -135,13 +258,13 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
 
           {/* Logged-in */}
           {!authLoading && user && (
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative" ref={userDropRef}>
               <button
-                onClick={() => setDropdownOpen(v => !v)}
+                onClick={() => setUserDropOpen(v => !v)}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-200"
                 style={{
-                  background: dropdownOpen ? 'rgba(255,255,255,0.08)' : 'transparent',
-                  border: `1px solid ${dropdownOpen ? colors.footerBorder : 'transparent'}`,
+                  background: userDropOpen ? 'rgba(255,255,255,0.08)' : 'transparent',
+                  border: `1px solid ${userDropOpen ? colors.footerBorder : 'transparent'}`,
                   cursor: 'pointer',
                 }}
                 onMouseEnter={e => {
@@ -149,32 +272,23 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                   e.currentTarget.style.borderColor = colors.footerBorder;
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = dropdownOpen ? 'rgba(255,255,255,0.08)' : 'transparent';
-                  e.currentTarget.style.borderColor = dropdownOpen ? colors.footerBorder : 'transparent';
+                  e.currentTarget.style.background = userDropOpen ? 'rgba(255,255,255,0.08)' : 'transparent';
+                  e.currentTarget.style.borderColor = userDropOpen ? colors.footerBorder : 'transparent';
                 }}
               >
                 {user.avatar_url ? (
-                  <img
-                    src={user.avatar_url}
-                    alt={user.name}
-                    className="w-7 h-7 rounded-full object-cover shrink-0"
-                  />
+                  <img src={user.avatar_url} alt={user.name} className="w-7 h-7 rounded-full object-cover shrink-0" />
                 ) : (
-                  <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                    style={{ background: '#6c63ff', color: '#ffffff' }}
-                  >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: '#6c63ff', color: '#ffffff' }}>
                     {initials}
                   </div>
                 )}
-                <span className="text-sm font-medium" style={{ color: colors.heroText }}>
-                  {displayName}
-                </span>
+                <span className="text-sm font-medium" style={{ color: colors.heroText }}>{displayName}</span>
                 <svg
                   width="11" height="11" viewBox="0 0 12 12" fill="none"
                   style={{
                     color: colors.heroSubtext,
-                    transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transform: userDropOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                     transition: 'transform 0.2s',
                     flexShrink: 0,
                   }}
@@ -183,8 +297,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                 </svg>
               </button>
 
-              {/* Dropdown menu */}
-              {dropdownOpen && (
+              {userDropOpen && (
                 <div
                   className="absolute right-0 top-full mt-2 w-48 rounded-xl py-1.5 z-50"
                   style={{
@@ -195,7 +308,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                     boxShadow: '0 8px 28px rgba(0,0,0,0.45)',
                   }}
                 >
-                  {DROPDOWN_ITEMS.map(item => (
+                  {USER_DROPDOWN_ITEMS.map(item => (
                     <a
                       key={item.label}
                       href={item.href}
@@ -240,17 +353,35 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
         style={{ backgroundColor: colors.navbarBg, borderTop: `1px solid ${colors.footerBorder}` }}
       >
         <div className="px-6 py-4 flex flex-col gap-1">
-          {config.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="py-3 text-sm font-medium border-b"
-              style={{ color: colors.navbarText, borderColor: colors.footerBorder }}
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {config.links.map(link =>
+            link.dropdown ? (
+              <div key="resources">
+                <p className="py-3 text-sm font-medium border-b" style={{ color: colors.navbarText, borderColor: colors.footerBorder }}>
+                  Resources
+                </p>
+                {RESOURCES_COLUMNS.map(col => (
+                  <div key={col.heading} className="pl-3 mt-2 mb-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: 'rgba(154,160,255,0.4)' }}>{col.heading}</p>
+                    {col.items.map(item => (
+                      <a key={item.label} href={item.href} className="block py-1.5 text-sm" style={{ color: colors.navbarText }} onClick={() => setMobileOpen(false)}>
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="py-3 text-sm font-medium border-b"
+                style={{ color: colors.navbarText, borderColor: colors.footerBorder }}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
 
           {/* Mobile logged-out */}
           {!authLoading && !user && (
@@ -287,7 +418,7 @@ export default function Navbar({ config, colors, brand, alwaysOpaque = false }) 
                 )}
                 <span className="text-sm font-medium" style={{ color: colors.heroText }}>{user.name ?? user.email}</span>
               </div>
-              {DROPDOWN_ITEMS.map(item => (
+              {USER_DROPDOWN_ITEMS.map(item => (
                 <a
                   key={item.label}
                   href={item.href}
