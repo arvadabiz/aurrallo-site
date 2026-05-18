@@ -254,44 +254,38 @@
   },
 
   "footer": {
-    "linksEnabled": false,
+    "linksEnabled": true,
     "linksDisabledText": "More pages are on the way — we're still building.",
     "description": "Automated invoice follow-ups, powered by QuickBooks.",
     "email": "hello@aurrallo.com",
     "columns": [
       {
-        "title": "Product",
+        "title": "Policies",
         "links": [
-          { "label": "Features",  "href": "#" },
-          { "label": "Pricing",   "href": "#" },
-          { "label": "Changelog", "href": "#" },
-          { "label": "Roadmap",   "href": "#" }
+          { "label": "Privacy Policy",  "href": "/privacy" },
+          { "label": "Terms of Service","href": "/terms-of-service" },
+          { "label": "Cookie Policy",   "href": "/cookie-policy" },
+          { "label": "Refund Policy",   "href": "/refund-policy" }
         ]
       },
       {
         "title": "Company",
         "links": [
-          { "label": "About",   "href": "#" },
-          { "label": "Blog",    "href": "#" },
-          { "label": "Careers", "href": "#" },
-          { "label": "Press",   "href": "#" }
+          { "label": "About",   "href": "/about" },
+          { "label": "Blog",    "href": "/blog" },
+          { "label": "Contact", "href": "/contact" },
+          { "label": "Careers", "href": "/careers" }
         ]
       },
       {
         "title": "Resources",
         "links": [
-          { "label": "Documentation", "href": "#" },
-          { "label": "API Reference", "href": "#" },
-          { "label": "Community",     "href": "#" },
-          { "label": "Status",        "href": "#" }
-        ]
-      },
-      {
-        "title": "Legal",
-        "links": [
-          { "label": "Privacy Policy",  "href": "#" },
-          { "label": "Terms of Service","href": "#" },
-          { "label": "Cookie Policy",   "href": "#" }
+          { "label": "FAQ",       "href": "/faq" },
+          { "label": "Security",  "href": "/security" },
+          { "label": "Changelog", "href": "/changelog" },
+          { "label": "Status",    "href": "https://status.aurrallo.com" },
+          { "label": "Feedback",  "href": "/feedback" },
+          { "label": "Support",   "href": "/support" }
         ]
       }
     ],

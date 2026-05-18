@@ -20,7 +20,7 @@ export default function Footer({ config, colors, brand }) {
         >
           {linksEnabled ? (
             /* ── Full layout: brand col + link columns ── */
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
               <BrandCol brand={brand} description={description} email={email} colors={colors} />
               {columns.map((col) => (
                 <div key={col.title}>
