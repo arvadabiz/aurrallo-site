@@ -17,31 +17,33 @@ const USER_DROPDOWN_ITEMS = [
 ];
 
 // ---------------------------------------------------------------------------
-// Resources mega-menu content — update columns here when finalised
+// Resources mega-menu content
 // ---------------------------------------------------------------------------
 const RESOURCES_COLUMNS = [
   {
     heading: 'Learn',
     items: [
-      { label: 'Blog',       href: '/blog',      desc: 'Tips, product updates, and more'  },
-      { label: 'Changelog',  href: '/changelog', desc: "What's new in Aurrallo"            },
-      { label: 'Use Cases',  href: '/use-cases', desc: 'How businesses use Aurrallo'      },
+      { label: 'Use Cases',            href: '/use-cases',       desc: 'How businesses use Aurrallo'          },
+      { label: 'Guides',               href: '/guides',          desc: 'How-to content and best practices'    },
+      { label: 'Product Updates',      href: '/product-updates', desc: 'Latest features and improvements'     },
+      { label: 'Industry Newsletter',  href: '/newsletter',      desc: 'Weekly insights on getting paid faster'},
     ],
   },
   {
     heading: 'Support',
     items: [
-      { label: 'Help Center', href: '/support',  desc: 'Guides and troubleshooting'       },
-      { label: 'Contact',     href: '/contact',  desc: 'Get in touch with our team'       },
-      { label: 'Status',      href: 'https://status.aurrallo.com', desc: 'Service uptime' },
+      { label: 'Help Center', href: '/support',                     desc: 'Docs and troubleshooting guides' },
+      { label: 'Contact',     href: '/contact',                     desc: 'Get in touch with our team'      },
+      { label: 'Status',      href: 'https://status.aurrallo.com',  desc: 'Live service uptime'             },
+      { label: 'Feedback',    href: '/feedback',                    desc: 'Share ideas or report issues'    },
     ],
   },
   {
     heading: 'Company',
     items: [
-      { label: 'About',     href: '/about',    desc: 'Our mission and story'              },
-      { label: 'Careers',   href: '/careers',  desc: "We're hiring"                      },
-      { label: 'Security',  href: '/security', desc: 'How we protect your data'          },
+      { label: 'About',    href: '/about',    desc: 'Our mission and story'    },
+      { label: 'Careers',  href: '/careers',  desc: "We're hiring"             },
+      { label: 'Press',    href: '/press',    desc: 'Brand assets and media'   },
     ],
   },
 ];
