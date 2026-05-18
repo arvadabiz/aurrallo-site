@@ -4,7 +4,7 @@ import { marked } from 'marked';
 import { supabase } from '../lib/supabase';
 import brand from '../config.json';
 
-marked.setOptions({ gfm: true, breaks: false });
+marked.setOptions({ gfm: true, breaks: true });
 
 const COLORS = brand.colors;
 
