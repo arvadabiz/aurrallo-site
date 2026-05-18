@@ -133,11 +133,11 @@ function CtaStrip() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href="/sign-up"
+            href="/register"
             className="px-7 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
             style={{ backgroundColor: colors.primaryBtn, color: colors.primaryBtnText, boxShadow: `0 4px 20px ${colors.primaryBtn}55` }}
           >
-            Start free trial
+            Get started
           </a>
           <a
             href="/pricing"
@@ -200,11 +200,11 @@ export default function FeaturesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="/sign-up"
+              href="/register"
               className="px-7 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
               style={{ backgroundColor: colors.primaryBtn, color: colors.primaryBtnText, boxShadow: `0 4px 20px ${colors.primaryBtn}55` }}
             >
-              Start free trial
+              Get started
             </a>
             <a
               href="/pricing"

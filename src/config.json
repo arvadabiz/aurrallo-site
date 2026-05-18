@@ -89,11 +89,11 @@
     "headlineAccent": "getting paid.",
     "subheadline": "Aurrallo connects to QuickBooks and automatically sends reminders for overdue invoices — so cash comes in without the awkward follow-up.",
     "useEmailCollection": false,
-    "primaryCta":   { "text": "Start free trial",   "href": "/register"     },
+    "primaryCta":   { "text": "Get started",   "href": "/register"     },
     "secondaryCta": { "text": "See how it works",   "href": "#how-it-works" },
     "emailPlaceholder": "Enter your email",
     "emailCtaText": "Get early access",
-    "trustNote": "No credit card required. Cancel anytime."
+    "trustNote": ""
   },
 
   "socialProof": {
@@ -201,7 +201,7 @@
           "QuickBooks integration",
           "Email support"
         ],
-        "cta": "Start free trial",
+        "cta": "Get started",
         "highlighted": false
       },
       {
@@ -217,7 +217,7 @@
           "Priority email support",
           "Basic analytics"
         ],
-        "cta": "Start free trial",
+        "cta": "Get started",
         "highlighted": true,
         "badge": "Most Popular"
       },
@@ -245,11 +245,11 @@
     "title": "Get paid without the follow-up",
     "subtitle": "Connect QuickBooks, set your reminder sequence, and let Aurrallo handle the rest.",
     "useEmailCollection": false,
-    "primaryCta":   { "text": "Start free trial", "href": "/register"           },
+    "primaryCta":   { "text": "Get started", "href": "/register"           },
     "secondaryCta": { "text": "Sign in",          "href": "/login"              },
     "emailPlaceholder": "Enter your email",
     "emailCtaText": "Get early access",
-    "trustNote": "No credit card required. Cancel anytime."
+    "trustNote": ""
   },
 
   "footer": {

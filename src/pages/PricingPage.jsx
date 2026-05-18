@@ -12,10 +12,6 @@ const { colors, brand, navbar, pricing, footer } = config;
 // ---------------------------------------------------------------------------
 const FAQS = [
   {
-    q: 'Is there a free trial?',
-    a: 'Yes — every plan includes a 14-day free trial. No credit card required to start. You only pay when you decide to continue.',
-  },
-  {
     q: 'What do I need to connect QuickBooks?',
     a: 'Just a QuickBooks Online account. The connection uses QuickBooks\' official OAuth flow and takes under two minutes. We never store your QuickBooks password.',
   },
@@ -109,18 +105,18 @@ function CtaStrip() {
         className={`max-w-2xl mx-auto text-center transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       >
         <h2 className="font-neue font-bold mb-4" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: colors.heroText }}>
-          Start your 14-day free trial
+          Ready to stop chasing invoices?
         </h2>
         <p className="text-sm mb-8" style={{ color: colors.heroSubtext }}>
-          No credit card required. Cancel anytime. Takes under 5 minutes to get set up.
+          Connect QuickBooks and send your first automated reminder in under five minutes.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href="/sign-up"
+            href="/register"
             className="px-7 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
             style={{ backgroundColor: colors.primaryBtn, color: colors.primaryBtnText, boxShadow: `0 4px 20px ${colors.primaryBtn}55` }}
           >
-            Get started free
+            Get started
           </a>
           <a
             href="/contact"
@@ -185,10 +181,10 @@ export default function PricingPage() {
             Simple, transparent pricing
           </h1>
           <p className="text-base leading-relaxed mb-3" style={{ color: colors.heroSubtext }}>
-            No hidden fees. No long-term contracts. Start free and upgrade as you grow.
+            No hidden fees. No long-term contracts. Upgrade or cancel anytime.
           </p>
           <p className="text-sm font-medium" style={{ color: colors.heroAccent }}>
-            14-day free trial on all plans — no credit card required
+            Simple pricing, no long-term contracts.
           </p>
         </div>
       </section>
