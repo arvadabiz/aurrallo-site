@@ -139,7 +139,7 @@ export default function LoginPage() {
 
             <p className="mt-4 text-center text-sm" style={{ color: colors.heroSubtext }}>
               No account?{' '}
-              <Link to="/sign-up" style={{ color: '#9aa0ff' }} className="hover:underline font-medium">Create one</Link>
+              <Link to="/register" style={{ color: '#9aa0ff' }} className="hover:underline font-medium">Create one</Link>
             </p>
           </div>
         </div>
