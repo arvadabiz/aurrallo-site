@@ -10,15 +10,7 @@ marked.setOptions({ gfm: true, breaks: true });
 
 const { colors, brand, navbar, footer } = config;
 
-// Prefix hash-only hrefs so section links work as full-page navigations from article pages
-const articleNavConfig = {
-  ...navbar,
-  links: navbar.links.map(link => ({
-    ...link,
-    href: link.href.startsWith('#') ? `/${link.href}` : link.href,
-  })),
-  ctaHref: navbar.ctaHref.startsWith('#') ? `/${navbar.ctaHref}` : navbar.ctaHref,
-};
+const articleNavConfig = navbar;
 
 function fmtDate(iso) {
   if (!iso) return null;

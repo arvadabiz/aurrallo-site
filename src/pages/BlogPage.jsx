@@ -7,14 +7,7 @@ import Footer from '../components/Footer';
 
 const { colors, brand, navbar, footer } = config;
 
-const blogNavConfig = {
-  ...navbar,
-  links: navbar.links.map(link => ({
-    ...link,
-    href: link.href.startsWith('#') ? `/${link.href}` : link.href,
-  })),
-  ctaHref: navbar.ctaHref.startsWith('#') ? `/${navbar.ctaHref}` : navbar.ctaHref,
-};
+const blogNavConfig = navbar;
 
 const GRADIENTS = [
   'linear-gradient(135deg, #6c63ff 0%, #3b82f6 100%)',

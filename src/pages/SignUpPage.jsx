@@ -9,15 +9,7 @@ const { colors, brand, navbar, footer } = config;
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
 
-const signUpNavConfig = {
-  ...navbar,
-  links: navbar.links.map(link => ({
-    ...link,
-    href: link.href?.startsWith('#') ? `/${link.href}` : link.href,
-  })),
-  ctaText: 'Sign In',
-  ctaHref: '/login',
-};
+const signUpNavConfig = navbar;
 
 // ---------------------------------------------------------------------------
 // Input helpers

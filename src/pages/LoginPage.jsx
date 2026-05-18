@@ -9,15 +9,7 @@ const { colors, brand, navbar, footer } = config;
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5173';
 
-const loginNavConfig = {
-  ...navbar,
-  links: navbar.links.map(link => ({
-    ...link,
-    href: link.href?.startsWith('#') ? `/${link.href}` : link.href,
-  })),
-  ctaText: 'Get Started',
-  ctaHref: '/sign-up',
-};
+const loginNavConfig = navbar;
 
 const baseInput = {
   width: '100%',
