@@ -24,7 +24,7 @@ const signUpNavConfig = {
 // ---------------------------------------------------------------------------
 const baseInput = {
   width: '100%',
-  padding: '8px 12px',
+  padding: '7px 10px',
   fontSize: '14px',
   borderRadius: '12px',
   border: '1px solid rgba(255,255,255,0.10)',
@@ -51,7 +51,7 @@ function useInputFocus() {
 function Field({ label, optional, error, children }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-1.5" style={{ color: colors.heroText }}>
+      <label className="block text-sm font-medium mb-1" style={{ color: colors.heroText }}>
         {label}
         {optional && <span className="font-normal ml-1" style={{ color: colors.heroSubtext }}>(optional)</span>}
       </label>
@@ -104,7 +104,7 @@ function ResendLogo({ size = 40 }) {
 function HeroPanel() {
   return (
     <div
-      className="hidden lg:flex w-1/2 flex-col justify-between px-16 py-14"
+      className="hidden lg:flex w-1/2 flex-col justify-center gap-5 px-10 py-10"
       style={{ borderRight: `1px solid ${colors.footerBorder}` }}
     >
       {/* Badge */}
@@ -112,104 +112,64 @@ function HeroPanel() {
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          padding: '6px 14px',
-          borderRadius: '8px',
+          padding: '5px 12px',
+          borderRadius: '7px',
           border: '1px solid rgba(154,160,255,0.3)',
           width: 'fit-content',
         }}
       >
-        <span
-          style={{
-            fontSize: '11px',
-            fontWeight: 600,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: colors.heroAccent,
-          }}
-        >
+        <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.heroAccent }}>
           Automated Invoice Follow-Up
         </span>
       </div>
 
-      {/* Hero content */}
-      <div className="flex flex-col gap-6">
-        <h1
-          className="font-neue font-bold"
-          style={{
-            fontSize: 'clamp(2.6rem, 4vw, 3.6rem)',
-            lineHeight: 1.07,
-            color: colors.heroText,
-          }}
-        >
-          Stop chasing<br />invoices.
-        </h1>
+      {/* Headline */}
+      <h1
+        className="font-neue font-bold"
+        style={{ fontSize: 'clamp(2.4rem, 3.8vw, 3.2rem)', lineHeight: 1.07, color: colors.heroText, margin: 0 }}
+      >
+        Stop chasing<br />invoices.
+      </h1>
 
-        <p
-          style={{
-            fontSize: '15px',
-            lineHeight: 1.7,
-            maxWidth: '340px',
-            color: colors.heroSubtext,
-          }}
+      {/* Body copy */}
+      <p style={{ fontSize: '14px', lineHeight: 1.65, color: colors.heroSubtext, margin: 0 }}>
+        Aurrallo connects to QuickBooks and automatically sends reminders
+        for overdue invoices — so you get paid without the awkward follow-up.
+      </p>
+
+      {/* Stat card — full width of panel content area */}
+      <div
+        className="flex items-center gap-5 rounded-2xl w-full"
+        style={{ background: '#6c63ff', padding: '18px 22px' }}
+      >
+        <span
+          className="font-neue font-bold shrink-0"
+          style={{ fontSize: '3.25rem', color: '#ffffff', lineHeight: 1 }}
         >
-          Aurrallo connects to QuickBooks and automatically sends reminders
-          for overdue invoices — so you get paid without the awkward follow-up.
+          3x
+        </span>
+        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.88)', lineHeight: 1.5, margin: 0 }}>
+          Average improvement in invoice collections after signing up with Aurrallo
         </p>
-
-        {/* Stat card — solid lavender, matches screenshot layout */}
-        <div
-          className="flex items-center gap-5 rounded-2xl"
-          style={{
-            background: '#6c63ff',
-            padding: '20px 24px',
-            maxWidth: '380px',
-          }}
-        >
-          <span
-            className="font-neue font-bold shrink-0"
-            style={{ fontSize: '3.75rem', color: '#ffffff', lineHeight: 1 }}
-          >
-            3x
-          </span>
-          <p
-            style={{
-              fontSize: '14px',
-              color: 'rgba(255,255,255,0.88)',
-              lineHeight: 1.55,
-              margin: 0,
-            }}
-          >
-            Average improvement in invoice collections after signing up with Aurrallo
-          </p>
-        </div>
       </div>
 
       {/* Integration logo row */}
       <div>
-        <p
-          style={{
-            fontSize: '10px',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'rgba(230,230,240,0.3)',
-            marginBottom: '14px',
-          }}
-        >
+        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(230,230,240,0.3)', marginBottom: '10px' }}>
           Integrates with
         </p>
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2.5">
-            <QuickBooksLogo size={32} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>QuickBooks</span>
+          <div className="flex items-center gap-2">
+            <QuickBooksLogo size={28} />
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'rgba(230,230,240,0.5)' }}>QuickBooks</span>
           </div>
-          <div className="flex items-center gap-2.5">
-            <StripeLogo size={32} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>Stripe</span>
+          <div className="flex items-center gap-2">
+            <StripeLogo size={28} />
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'rgba(230,230,240,0.5)' }}>Stripe</span>
           </div>
-          <div className="flex items-center gap-2.5">
-            <ResendLogo size={32} />
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(230,230,240,0.55)' }}>Resend</span>
+          <div className="flex items-center gap-2">
+            <ResendLogo size={28} />
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'rgba(230,230,240,0.5)' }}>Resend</span>
           </div>
         </div>
       </div>
@@ -297,23 +257,23 @@ export default function SignUpPage() {
         <HeroPanel />
 
         {/* ── Right panel ── */}
-        <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-16 py-12 overflow-y-auto">
-          <div className="w-full max-w-sm">
+        <div className="w-full lg:w-1/2 flex items-start lg:items-center justify-center px-6 lg:px-10 py-8 overflow-y-auto">
+          <div className="w-full max-w-md">
 
             {/* Mobile logo */}
-            <div className="flex items-center gap-2.5 mb-8 lg:hidden">
+            <div className="flex items-center gap-2.5 mb-6 lg:hidden">
               <img src={brand.logo} alt={brand.name} className="w-8 h-8 rounded-xl object-contain" />
               <span className="font-neue font-bold text-lg tracking-tight" style={{ color: colors.heroAccent }}>
                 {brand.name}
               </span>
             </div>
 
-            <div className="mb-7">
+            <div className="mb-5">
               <h2 className="text-2xl font-semibold" style={{ color: colors.heroText }}>Create your account</h2>
               <p className="text-sm mt-1" style={{ color: colors.heroSubtext }}>Get started with automated invoice follow-up</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-3" noValidate>
 
               <div className="grid grid-cols-2 gap-3">
                 <Field label="First name" error={errors.firstName}>
