@@ -62,7 +62,7 @@ export default function ArticlePage() {
 
     supabase
       .from('articles')
-      .select('id, title, slug, body, published_at, is_updated, author_id, author:users!author_id(name, first_name, last_name, avatar_url)')
+      .select('id, title, slug, body, published_at, is_updated, hide_author, hide_title, hide_date, author_id, author:users!author_id(name, first_name, last_name, avatar_url)')
       .eq('slug', slug)
       .not('published_at', 'is', null)
       .maybeSingle()
@@ -139,47 +139,56 @@ export default function ArticlePage() {
   // ── Article ──────────────────────────────────────────────
   const author     = article.author;
   const authorName = authorDisplayName(author);
+  const showAuthor = !article.hide_author && !!authorName;
+  const showDate   = !article.hide_date && !!article.published_at;
+  const hasHeader  = !article.hide_title || showAuthor || showDate || article.is_updated;
 
   return (
     <Shell>
       <article className="max-w-3xl mx-auto px-6 py-14">
 
-        <header className="mb-10">
-          {article.is_updated && (
-            <span className="inline-block mb-4 text-xs font-semibold px-2.5 py-1 rounded-full"
-                  style={{ background: 'rgba(251,191,36,0.12)', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.2)' }}>
-              Updated
-            </span>
-          )}
+        {hasHeader && (
+          <header className="mb-10">
+            {article.is_updated && (
+              <span className="inline-block mb-4 text-xs font-semibold px-2.5 py-1 rounded-full"
+                    style={{ background: 'rgba(251,191,36,0.12)', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.2)' }}>
+                Updated
+              </span>
+            )}
 
-          <h1 className="font-neue font-bold text-4xl leading-tight mb-6" style={{ color: colors.heroText }}>
-            {article.title}
-          </h1>
+            {!article.hide_title && (
+              <h1 className="font-neue font-bold text-4xl leading-tight mb-6" style={{ color: colors.heroText }}>
+                {article.title}
+              </h1>
+            )}
 
-          <div className="flex items-center gap-4 flex-wrap">
-            {authorName && (
-              <div className="flex items-center gap-2.5">
-                {author?.avatar_url ? (
-                  <img src={author.avatar_url} alt={authorName} className="w-8 h-8 rounded-full object-cover" />
-                ) : (
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-                       style={{ background: 'rgba(108,99,255,0.25)', color: colors.heroAccent }}>
-                    {authorName[0].toUpperCase()}
+            {(showAuthor || showDate) && (
+              <div className="flex items-center gap-4 flex-wrap">
+                {showAuthor && (
+                  <div className="flex items-center gap-2.5">
+                    {author?.avatar_url ? (
+                      <img src={author.avatar_url} alt={authorName} className="w-8 h-8 rounded-full object-cover" />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
+                           style={{ background: 'rgba(108,99,255,0.25)', color: colors.heroAccent }}>
+                        {authorName[0].toUpperCase()}
+                      </div>
+                    )}
+                    <span className="text-sm" style={{ color: colors.heroSubtext }}>{authorName}</span>
                   </div>
                 )}
-                <span className="text-sm" style={{ color: colors.heroSubtext }}>{authorName}</span>
+                {showDate && (
+                  <>
+                    {showAuthor && <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>}
+                    <span className="text-sm" style={{ color: colors.heroSubtext }}>{fmtDate(article.published_at)}</span>
+                  </>
+                )}
               </div>
             )}
-            {article.published_at && (
-              <>
-                {authorName && <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>}
-                <span className="text-sm" style={{ color: colors.heroSubtext }}>{fmtDate(article.published_at)}</span>
-              </>
-            )}
-          </div>
-        </header>
+          </header>
+        )}
 
-        <div className="mb-10" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }} />
+        {hasHeader && <div className="mb-10" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }} />}
 
         <div
           className="prose prose-invert prose-p:leading-relaxed prose-headings:font-neue prose-a:text-[#9aa0ff] prose-a:no-underline hover:prose-a:underline max-w-none"
