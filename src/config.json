@@ -263,7 +263,7 @@
         "title": "Policies",
         "links": [
           { "label": "Privacy Policy",  "href": "/privacy" },
-          { "label": "Terms of Service","href": "/terms-of-service" },
+          { "label": "Terms of Service","href": "/terms" },
           { "label": "Cookie Policy",   "href": "/cookie-policy" },
           { "label": "Refund Policy",   "href": "/refund-policy" }
         ]
