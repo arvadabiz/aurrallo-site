@@ -24,7 +24,7 @@ export default function Navbar({ config, colors, brand }) {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Brand */}
-        <a href="#" className="flex items-center gap-2.5">
+        <a href="/" className="flex items-center gap-2.5">
           <img
             src={brand.logo}
             alt={brand.name}

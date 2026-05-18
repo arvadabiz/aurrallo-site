@@ -2,13 +2,24 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { marked } from 'marked';
 import { supabase } from '../lib/supabase';
-import brand from '../config.json';
+import config from '../config.json';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 marked.setOptions({ gfm: true, breaks: true });
 
-const COLORS = brand.colors;
+const { colors, brand, navbar, footer } = config;
 
-// states: 'loading' | 'found' | 'not_found' | 'error' | 'unconfigured'
+// Prefix hash-only hrefs so section links work as full-page navigations from article pages
+const articleNavConfig = {
+  ...navbar,
+  links: navbar.links.map(link => ({
+    ...link,
+    href: link.href.startsWith('#') ? `/${link.href}` : link.href,
+  })),
+  ctaHref: navbar.ctaHref.startsWith('#') ? `/${navbar.ctaHref}` : navbar.ctaHref,
+};
+
 function fmtDate(iso) {
   if (!iso) return null;
   return new Date(iso).toLocaleDateString('en-US', {
@@ -21,27 +32,14 @@ function authorDisplayName(author) {
   return author.name || [author.first_name, author.last_name].filter(Boolean).join(' ') || null;
 }
 
-function Shell({ title, children }) {
+function Shell({ children }) {
   return (
-    <div className="font-sans min-h-screen" style={{ background: COLORS.heroBg, color: COLORS.heroText }}>
-      <nav className="sticky top-0 z-50 border-b"
-           style={{ background: COLORS.navbarBg, backdropFilter: 'blur(14px)', borderColor: 'rgba(255,255,255,0.07)' }}>
-        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <img src={brand.brand.logo} alt={brand.brand.name} className="w-7 h-7 rounded-lg object-cover" />
-            <span className="font-neue font-bold text-[15px]" style={{ color: COLORS.heroText }}>
-              {brand.brand.name}
-            </span>
-          </Link>
-          {title && (
-            <>
-              <span className="text-sm mx-1" style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
-              <span className="text-sm truncate max-w-[220px]" style={{ color: COLORS.heroSubtext }}>{title}</span>
-            </>
-          )}
-        </div>
-      </nav>
-      {children}
+    <div className="font-sans min-h-screen flex flex-col" style={{ background: colors.heroBg, color: colors.heroText }}>
+      <Navbar config={articleNavConfig} colors={colors} brand={brand} />
+      <div className="flex-1 pt-16">
+        {children}
+      </div>
+      <Footer config={footer} colors={colors} brand={brand} />
     </div>
   );
 }
@@ -94,9 +92,9 @@ export default function ArticlePage() {
   if (state === 'loading') {
     return (
       <Shell>
-        <div className="flex items-center justify-center" style={{ minHeight: '60vh' }}>
+        <div className="flex items-center justify-center" style={{ minHeight: '50vh' }}>
           <div className="w-6 h-6 rounded-full border-2 animate-spin"
-               style={{ borderColor: COLORS.heroAccent, borderTopColor: 'transparent' }} />
+               style={{ borderColor: colors.heroAccent, borderTopColor: 'transparent' }} />
         </div>
       </Shell>
     );
@@ -105,11 +103,11 @@ export default function ArticlePage() {
   // ── Not found ────────────────────────────────────────────
   if (state === 'not_found') {
     return (
-      <Shell title="Not found">
+      <Shell>
         <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-          <p className="text-5xl font-neue font-bold mb-4" style={{ color: COLORS.heroText }}>404</p>
-          <p className="mb-8" style={{ color: COLORS.heroSubtext }}>This page doesn't exist.</p>
-          <Link to="/" className="text-sm font-medium" style={{ color: COLORS.heroAccent }}>
+          <p className="text-5xl font-neue font-bold mb-4" style={{ color: colors.heroText }}>404</p>
+          <p className="mb-8" style={{ color: colors.heroSubtext }}>This page doesn't exist.</p>
+          <Link to="/" className="text-sm font-medium" style={{ color: colors.heroAccent }}>
             ← Back to home
           </Link>
         </div>
@@ -120,17 +118,17 @@ export default function ArticlePage() {
   // ── Error / unconfigured ─────────────────────────────────
   if (state === 'error' || state === 'unconfigured') {
     return (
-      <Shell title="Error">
+      <Shell>
         <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-          <p className="text-lg font-semibold mb-3" style={{ color: COLORS.heroText }}>
+          <p className="text-lg font-semibold mb-3" style={{ color: colors.heroText }}>
             {state === 'unconfigured' ? 'Site not configured' : 'Something went wrong'}
           </p>
-          <p className="text-sm mb-8" style={{ color: COLORS.heroSubtext }}>
+          <p className="text-sm mb-8" style={{ color: colors.heroSubtext }}>
             {state === 'unconfigured'
               ? 'VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are not set.'
               : error}
           </p>
-          <Link to="/" className="text-sm font-medium" style={{ color: COLORS.heroAccent }}>
+          <Link to="/" className="text-sm font-medium" style={{ color: colors.heroAccent }}>
             ← Back to home
           </Link>
         </div>
@@ -143,7 +141,7 @@ export default function ArticlePage() {
   const authorName = authorDisplayName(author);
 
   return (
-    <Shell title={article.title}>
+    <Shell>
       <article className="max-w-3xl mx-auto px-6 py-14">
 
         <header className="mb-10">
@@ -154,7 +152,7 @@ export default function ArticlePage() {
             </span>
           )}
 
-          <h1 className="font-neue font-bold text-4xl leading-tight mb-6" style={{ color: COLORS.heroText }}>
+          <h1 className="font-neue font-bold text-4xl leading-tight mb-6" style={{ color: colors.heroText }}>
             {article.title}
           </h1>
 
@@ -165,17 +163,17 @@ export default function ArticlePage() {
                   <img src={author.avatar_url} alt={authorName} className="w-8 h-8 rounded-full object-cover" />
                 ) : (
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-                       style={{ background: 'rgba(108,99,255,0.25)', color: COLORS.heroAccent }}>
+                       style={{ background: 'rgba(108,99,255,0.25)', color: colors.heroAccent }}>
                     {authorName[0].toUpperCase()}
                   </div>
                 )}
-                <span className="text-sm" style={{ color: COLORS.heroSubtext }}>{authorName}</span>
+                <span className="text-sm" style={{ color: colors.heroSubtext }}>{authorName}</span>
               </div>
             )}
             {article.published_at && (
               <>
                 {authorName && <span style={{ color: 'rgba(255,255,255,0.15)' }}>·</span>}
-                <span className="text-sm" style={{ color: COLORS.heroSubtext }}>{fmtDate(article.published_at)}</span>
+                <span className="text-sm" style={{ color: colors.heroSubtext }}>{fmtDate(article.published_at)}</span>
               </>
             )}
           </div>
@@ -188,19 +186,6 @@ export default function ArticlePage() {
           dangerouslySetInnerHTML={{ __html: bodyHtml }}
         />
       </article>
-
-      <footer className="mt-16 border-t" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-        <div className="max-w-3xl mx-auto px-6 py-8 flex items-center justify-between gap-4 flex-wrap">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <img src={brand.brand.logo} alt={brand.brand.name} className="w-6 h-6 rounded-lg object-cover" />
-            <span className="text-sm font-neue font-bold" style={{ color: COLORS.heroText }}>{brand.brand.name}</span>
-          </Link>
-          <div className="flex items-center gap-4 text-xs" style={{ color: 'rgba(230,230,240,0.4)' }}>
-            <Link to="/privacy" className="hover:opacity-80 transition-opacity">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="hover:opacity-80 transition-opacity">Terms of Service</Link>
-          </div>
-        </div>
-      </footer>
     </Shell>
   );
 }
